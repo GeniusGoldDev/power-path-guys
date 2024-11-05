@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@react-spring/web": "^9.5.5",
+    "framer": "^2.4.1",
+    "react-swipeable": "^7.0.1",
+    "react-tinder-card": "^1.6.4",
+    "bcryptjs": "^2.4.3",
+    "mongodb": "^6.9.0"
+  }
+}

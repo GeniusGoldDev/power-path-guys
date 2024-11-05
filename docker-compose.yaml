@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  power-path-server:
+    container_name: power-path-server
+    restart: on-failure
+    build: ./server/.
+    volumes:
+      - ./server/.:/usr/src/app
+    ports:
+      - "5006:80"
+    depends_on:
+      - server-db
+    networks:
+      - app_network
+    env_file:
+      - ./env_files/.env
+    command: uvicorn main:app --host 0.0.0.0 --port 80 --reload
+
+  server-db:
+    image: postgres:15
+    platform: linux/amd64
+    ports:
+      - "6006:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-U", "user", "-d", "mydatabase"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - app_network
+    restart: always
+
+volumes:
+  postgres_data:
+
+networks:
+  app_network:
+    name: app_network
