@@ -1,0 +1,77 @@
+.workout-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .personalized-card, .filter-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    text-align: center;
+  }
+  
+  .personalized-card h2 {
+    margin: 0;
+  }
+  
+  .personalized-card button, .filter-card button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .filter-card h2 {
+    margin-bottom: 20px;
+  }
+  
+  .filter-card label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .filter-card select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .workout-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .workout-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    text-align: center;
+    width: 200px;
+  }
+  
+  .workout-card h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .workout-card p {
+    margin: 10px 0 5px;
+    color: #666;
+  }
+  

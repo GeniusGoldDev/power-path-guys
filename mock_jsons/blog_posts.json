@@ -1,0 +1,25 @@
+{
+    "user_id": 1,
+    "posts": [
+        {
+            "user_id": "User 1",
+            "content": "Content Sample 1",
+            "number_of_likes": "20"
+        },
+        {
+            "user_id": "User 1",
+            "content": "Content Sample 2",
+            "number_of_likes": "20"
+        },
+        {
+            "user_id": "User 2",
+            "content": "Content Sample 3",
+            "number_of_likes": "30"
+        },
+        {
+            "user_id": "User 2",
+            "content": "Content Sample 4",
+            "number_of_likes": "40"
+        }
+    ]
+}

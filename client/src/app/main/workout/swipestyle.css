@@ -1,0 +1,333 @@
+/* *, *:before, *:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: black;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.workout {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.loaded.workout {
+  opacity: 1;
+}
+
+.workout--status {
+  position: absolute;
+  top: 50%;
+  margin-top: -30px;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.workout--status i {
+  font-size: 100px;
+  opacity: 0;
+  transform: scale(0.3);
+  transition: all 0.2s ease-in-out;
+  position: absolute;
+  width: 100px;
+  margin-left: -50px;
+}
+
+.workout_love .fa-heart {
+  opacity: 0.7;
+  transform: scale(1);
+}
+
+.workout_nope .fa-remove {
+  opacity: 0.7;
+  transform: scale(1);
+}
+
+.workout--cards {
+  flex-grow: 1;
+  padding-top: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 1;
+}
+
+.workout--card {
+  display: inline-block;
+  width: 90vw;
+  max-width: 400px;
+  height: 70vh;
+  background: #FFFFFF;
+  padding-bottom: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: absolute;
+  will-change: transform;
+  transition: all 0.3s ease-in-out;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.moving.workout--card {
+  transition: none;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.workout--card img {
+  max-width: 100%;
+  pointer-events: none;
+}
+
+.workout--card h3 {
+  margin-top: 32px;
+  font-size: 32px;
+  padding: 0 16px;
+  pointer-events: none;
+  color: #e89d3a;
+}
+
+.workout--card p {
+  margin-top: 24px;
+  font-size: 20px;
+  padding: 0 16px;
+  pointer-events: none;
+  color: #e89d3a;
+}
+
+.workout--buttons {
+  flex: 0 0 100px;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.workout--buttons button {
+  border-radius: 50%;
+  line-height: 60px;
+  width: 60px;
+  border: 0;
+  background: #FFFFFF;
+  display: inline-block;
+  margin: 0 8px;
+}
+
+.workout--buttons button:focus {
+  outline: 0;
+}
+
+.workout--buttons i {
+  font-size: 32px;
+  vertical-align: middle;
+}
+
+.fa-heart {
+  color: #FFACE4;
+}
+
+.fa-remove {
+  color: #CDD6DD;
+}  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: black;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.workout {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.loaded.workout {
+  opacity: 1;
+}
+
+.workout--status {
+  position: absolute;
+  top: 50%;
+  margin-top: -30px;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.workout--status i {
+  font-size: 100px;
+  opacity: 0;
+  transform: scale(0.3);
+  transition: all 0.2s ease-in-out;
+  position: absolute;
+  width: 100px;
+  margin-left: -50px;
+}
+
+.workout_love .fa-heart {
+  opacity: 0.7;
+  transform: scale(1);
+}
+
+.workout_nope .fa-remove {
+  opacity: 0.7;
+  transform: scale(1);
+}
+
+.workout--cards {
+  flex-grow: 1;
+  padding-top: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 1;
+  position: absolute; /* Keep the cards positioned absolutely */
+  bottom: 175px; /* Set the distance from the bottom of the screen */
+  left: 50%; /* Center the cards horizontally */
+  transform: translateX(-50%); /* Adjust for the centering effect */
+}
+
+.workout--card {
+  display: inline-block;
+  width: 90vw;
+  max-width: 400px;
+  height: 70vh;
+  background: #FFFFFF;
+  padding-bottom: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: absolute;
+  will-change: transform;
+  transition: all 0.3s ease-in-out;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.moving.workout--card {
+  transition: none;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.workout--card img {
+  max-width: 100%;
+  pointer-events: none;
+}
+
+.workout--card h3 {
+  margin-top: 32px;
+  font-size: 32px;
+  padding: 0 16px;
+  pointer-events: none;
+  color: #e89d3a;
+}
+
+.workout--card p {
+  margin-top: 24px;
+  font-size: 20px;
+  padding: 0 16px;
+  pointer-events: none;
+  color: #e89d3a;
+}
+
+.workout--buttons {
+  display: flex; /* Use flexbox to align buttons */
+  justify-content: center; /* Center the buttons */
+  position: absolute; /* Positioning absolute to control exact placement */
+  bottom: 100px; /* Set the distance from the bottom of the screen */
+  left: 50%; /* Center the buttons horizontally */
+  transform: translateX(-50%); /* Adjust for the centering effect */
+  z-index: 3; /* Ensure buttons are above cards */
+}
+
+.workout--buttons button {
+  border-radius: 50%;
+  line-height: 60px;
+  width: 60px;
+  border: 0;
+  background: #FFFFFF;
+  display: inline-block;
+  margin: 0 8px;
+  position: relative; /* Added to prevent button overlap */
+  z-index: 4; /* Ensure button layer is above others */
+}
+
+.workout--buttons button:focus {
+  outline: 0;
+}
+
+.workout--buttons i {
+  font-size: 32px;
+  vertical-align: middle;
+}
+
+.fa-heart {
+  color: #FFACE4;
+}
+
+.fa-remove {
+  color: #CDD6DD;
+}

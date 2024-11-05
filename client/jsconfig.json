@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "esnext",                // or "es6" or whatever version you need
+    "module": "esnext",                // or "commonjs" depending on your setup
+    "jsx": "preserve",                 // Options are "preserve", "react", or "react-jsx"
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+
+}
