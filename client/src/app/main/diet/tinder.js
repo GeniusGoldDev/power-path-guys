@@ -1,583 +1,311 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Box,
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   Typography,
+  Modal,
+  Paper,
+  IconButton,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import './MealSwipeComponent.css';
 import Hammer from 'hammerjs';
 
-const mealsData = {
-  Monday: [
-    {
-      meal: "Breakfast",
-      title: "Fluffy Pancakes",
-      calories: 420,
-      macros: { protein: 10, fats: 14, carbs: 45 },
-      image: "https://images.unsplash.com/photo-1559638740-3d5419b8b16a",
-    },
-    {
-      meal: "Lunch",
-      title: "Grilled Salmon Salad",
-      calories: 520,
-      macros: { protein: 30, fats: 20, carbs: 40 },
-      image: "https://images.unsplash.com/photo-1514516876419-2c04ed3d3c74",
-    },
-    {
-      meal: "Dinner",
-      title: "Pasta Carbonara",
-      calories: 700,
-      macros: { protein: 25, fats: 30, carbs: 70 },
-      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
-    },
-  ],
-  Tuesday: [
-    {
-      meal: "Breakfast",
-      title: "Greek Yogurt Parfait",
-      calories: 350,
-      macros: { protein: 20, fats: 5, carbs: 50 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-    {
-      meal: "Lunch",
-      title: "Chicken Caesar Wrap",
-      calories: 600,
-      macros: { protein: 35, fats: 25, carbs: 45 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-    {
-      meal: "Dinner",
-      title: "Stir-Fried Tofu and Vegetables",
-      calories: 450,
-      macros: { protein: 20, fats: 15, carbs: 60 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-  ],
-  Wednesday: [
-    {
-      meal: "Breakfast",
-      title: "Oatmeal with Berries",
-      calories: 250,
-      macros: { protein: 10, fats: 5, carbs: 45 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-    {
-      meal: "Lunch",
-      title: "Quinoa Salad",
-      calories: 400,
-      macros: { protein: 15, fats: 10, carbs: 60 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-    {
-      meal: "Dinner",
-      title: "Beef Stir-Fry",
-      calories: 700,
-      macros: { protein: 40, fats: 30, carbs: 60 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-  ],
-  Thursday: [
-    {
-      meal: "Breakfast",
-      title: "Smoothie Bowl",
-      calories: 300,
-      macros: { protein: 15, fats: 8, carbs: 50 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-    {
-      meal: "Lunch",
-      title: "Turkey Sandwich",
-      calories: 500,
-      macros: { protein: 30, fats: 15, carbs: 50 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-    {
-      meal: "Dinner",
-      title: "Vegetable Curry",
-      calories: 600,
-      macros: { protein: 15, fats: 20, carbs: 85 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-  ],
-  Friday: [
-    {
-      meal: "Breakfast",
-      title: "Egg and Spinach Wrap",
-      calories: 350,
-      macros: { protein: 20, fats: 15, carbs: 30 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-    {
-      meal: "Lunch",
-      title: "Poke Bowl",
-      calories: 600,
-      macros: { protein: 30, fats: 20, carbs: 65 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-    {
-      meal: "Dinner",
-      title: "Shrimp Tacos",
-      calories: 500,
-      macros: { protein: 25, fats: 15, carbs: 55 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-  ],
-  Saturday: [
-    {
-      meal: "Breakfast",
-      title: "French Toast",
-      calories: 400,
-      macros: { protein: 12, fats: 18, carbs: 50 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-    {
-      meal: "Lunch",
-      title: "Caprese Salad",
-      calories: 350,
-      macros: { protein: 15, fats: 20, carbs: 30 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-    {
-      meal: "Dinner",
-      title: "BBQ Chicken",
-      calories: 700,
-      macros: { protein: 40, fats: 30, carbs: 60 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
-    },
-  ],
-  Sunday: [
-    {
-      meal: "Breakfast",
-      title: "Avocado Toast",
-      calories: 300,
-      macros: { protein: 8, fats: 12, carbs: 40 },
-      image: "https://images.unsplash.com/photo-1555685812-4f7e1b0e1b58",
-    },
-  ],
-};
-
-const TinderComponent = () => {
-  const [currentDay, setCurrentDay] = useState('');
-  const [tinderVisible, setTinderVisible] = useState(false);
+const MealSwipeComponent = () => {
+  const [openRedoPopup, setOpenRedoPopup] = useState(false);
+  const [currentDay, setCurrentDay] = useState(null);
+  const [showTinder, setShowTinder] = useState(false);
   const [chosenMeals, setChosenMeals] = useState({
-    Sunday: [],
     Monday: [],
     Tuesday: [],
     Wednesday: [],
     Thursday: [],
     Friday: [],
     Saturday: [],
+    Sunday: []
   });
-  const [openDialog, setOpenDialog] = useState(false);
-  const [swipingStarted, setSwipingStarted] = useState(false);
-  const [tinderCards, setTinderCards] = useState([]);
-  const [showChosenMeals, setShowChosenMeals] = useState(false);
 
-  useEffect(() => {
-    if (tinderCards.length > 0) {
-      const allCards = Array.from(document.querySelectorAll('.tinder--card'));
-      allCards.forEach((el, index) => {
-        const hammertime = new Hammer(el);
+  const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  
+  const tinderCardsContainerRef = useRef(null);
+  const chosenPlanSectionRef = useRef(null);
+  const tinderContainerRef = useRef(null);
+  
+  const tinderCardTemplate1 = `
+    <div class="tinder--card" data-swiped="false">
+      <div class="mini-card" data-meal="Breakfast">
+        <div class="meal-image-container">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38" alt="Pasta Carbonara" class="meal-image">
+          <div class="calorie-badge"><i>🔥</i> 300 Calories</div>
+        </div>
+        <div class="meal-info">
+          <div class="meal-title">Breakfast</div>
+          <div style="color:grey">Fluffy Pancakes</div>
+          <div class="macros">
+            <div class="macro-item protein"><span class="dot"></span> <span>8g Protein</span></div>
+            <div class="macro-item fats"><span class="dot"></span> <span>15g Fats</span></div>
+            <div class="macro-item carbs"><span class="dot"></span> <span>32g Carbs</span></div>
+          </div>
+        </div>
+        <div class="meal-image-container">
+          <img src="https://images.unsplash.com/photo-1516100882582-96c3a05fe590" alt="Avocado Toast" class="meal-image">
+          <div class="calorie-badge"><i>🔥</i> 450 Calories</div>
+        </div>
+        <div class="meal-info">
+          <div class="meal-title">Lunch</div>
+          <div style="color:grey">Veggie Burger</div>
+          <div class="macros">
+            <div class="macro-item protein"><span class="dot"></span> <span>40g Protein</span></div>
+            <div class="macro-item fats"><span class="dot"></span> <span>15g Fats</span></div>
+            <div class="macro-item carbs"><span class="dot"></span> <span>50g Carbs</span></div>
+          </div>
+        </div>
+        <div class="meal-image-container">
+          <img src="https://images.unsplash.com/photo-1506354666786-959d6d497f1a" alt="Smoothie Bowl" class="meal-image">
+          <div class="calorie-badge"><i>🔥</i> 500 Calories</div>
+        </div>
+        <div class="meal-info">
+          <div class="meal-title">Dinner</div>
+          <div style="color:grey">Vegetable Stir Fry</div>
+          <div class="macros">
+            <div class="macro-item protein"><span class="dot"></span> <span>60g Protein</span></div>
+            <div class="macro-item fats"><span class="dot"></span> <span>35g Fats</span></div>
+            <div class="macro-item carbs"><span class="dot"></span> <span>30g Carbs</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
 
-        hammertime.on('pan', function (event) {
-          el.classList.add('moving');
-          const xMulti = event.deltaX * 0.03;
-          const yMulti = event.deltaY / 80;
-          const rotate = xMulti * yMulti;
-          el.style.transform = `translate(${event.deltaX}px, ${event.deltaY}px) rotate(${rotate}deg)`;
-          setSwipingStarted(true);
-        });
-
-        hammertime.on('panend', function (event) {
-          el.classList.remove('moving');
-          const keep = Math.abs(event.deltaX) < 100 && Math.abs(event.velocityX) < 0.5;
-
-          if (keep) {
-            el.style.transform = '';
-          } else {
-            const endX = event.deltaX > 0 ? 1000 : -1000;
-            el.style.transform = `translate(${endX}px, ${event.deltaY}px)`;
-            el.classList.add('removed');
-            setTinderCards(prev => prev.slice(1));
-            if (event.deltaX > 0) {
-              setChosenMeals(prev => ({
-                ...prev,
-                [currentDay]: [...prev[currentDay], mealsData[currentDay][index]],
-              }));
-            }
-            updateCards();
-          }
-        });
-      });
-    }
-  }, [tinderCards]);
+  const handleDayClick = (day) => {
+    showTinderCard(day);
+    console.log('showTinderCard:clicked');
+  };
 
   const showTinderCard = (day) => {
     setCurrentDay(day);
-    setSwipingStarted(false);
-    setTinderVisible(true);
-    setTinderCards(mealsData[day]);
-    setShowChosenMeals(false); // Hide chosen meals when showing new cards
+    setShowTinder(true);
+
+    if (tinderContainerRef.current && chosenPlanSectionRef.current) {
+      tinderContainerRef.current.style.display = "flex";
+      chosenPlanSectionRef.current.style.display = "none";
+    } else {
+      console.error("One of the elements is not found in the DOM.");
+    }
+
+    if (tinderCardsContainerRef.current) {
+      tinderCardsContainerRef.current.innerHTML = tinderCardTemplate1;
+      initCards();
+    } else {
+      console.error("Tinder cards container not found.");
+    }
+  };
+
+  const initCards = () => {
+    const allCards = Array.from(tinderCardsContainerRef.current.querySelectorAll('.tinder--card'));
+    allCards.forEach((el, index) => {
+      const hammertime = new Hammer(el);
+
+      hammertime.on('pan', function (event) {
+        el.classList.add('moving');
+        const xMulti = event.deltaX * 0.03;
+        const yMulti = event.deltaY / 80;
+        const rotate = xMulti * yMulti;
+        el.style.transform = `translate(${event.deltaX}px, ${event.deltaY}px) rotate(${rotate}deg)`;
+      });
+
+      hammertime.on('panend', function (event) {
+        el.classList.remove('moving');
+        const keep = Math.abs(event.deltaX) < 100 && Math.abs(event.velocityX) < 0.5;
+
+        if (keep) {
+          el.style.transform = '';
+        } else {
+          const endX = event.deltaX > 0 ? 1000 : -1000;
+          const rotate = (event.deltaX * 0.03) * (event.deltaY / 80);
+
+          if (event.deltaX > 0 && el.getAttribute("data-swiped") === "false") {
+            el.setAttribute("data-swiped", "true");
+            el.style.transition = "transform 0.3s ease-out";
+            el.style.transform = "translate(0px, 0px) rotate(0deg)";
+            setChosenMeals(prev => {
+              const updatedMeals = { ...prev };
+              updatedMeals[currentDay].push(...el.querySelectorAll('.mini-card'));
+              return updatedMeals;
+            });
+
+            allCards.forEach((card, idx) => {
+              if (idx !== index) {
+                card.style.display = "none";
+              } else {
+                card.style.pointerEvents = "none";
+              }
+            });
+
+            const dayButton = document.getElementById(currentDay);
+            dayButton.disabled = true;
+            dayButton.innerHTML += ` <span class="tick-icon">✔</span>`;
+          } else if (event.deltaX < 0) {
+            el.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+            el.style.transform = `translate(${endX}px, ${event.deltaY}px) rotate(${rotate}deg)`;
+            el.style.opacity = '0';
+            el.classList.add('removed');
+            setTimeout(() => el.remove(), 300);
+          }
+          updateCards();
+        }
+      });
+    });
+    updateCards();
+  };
+
+  const handleSwipeButton = (direction) => {
+    const cards = Array.from(tinderCardsContainerRef.current.querySelectorAll('.tinder--card:not(.removed)'));
+    if (cards.length === 0) return;
+
+    const card = cards[0];
+    const moveOutWidth = document.body.clientWidth * 1.5;
+
+    if (direction === 'left') {
+      card.style.transform = `translate(-${moveOutWidth}px, -100px) rotate(-30deg)`;
+      card.classList.add('removed');
+      updateCards();
+    } else if (direction === 'right') {
+      card.style.transform = `translate(${moveOutWidth}px, -100px) rotate(30deg)`;
+      card.classList.add('removed');
+
+      // const currentIndex = weekDays.indexOf(currentDay);
+      // const nextDay = (currentIndex >= 0 && currentIndex < weekDays.length - 1) ? weekDays[currentIndex + 1] : "Sunday";
+      // setCurrentDay(nextDay);
+      const currentIndex = weekDays.indexOf(currentDay);
+      let nextDay;
+
+      if (currentIndex === weekDays.length - 2) {
+        // If the current day is Friday, skip to Saturday
+        nextDay = weekDays[weekDays.length - 1];
+      } else if (currentIndex >= 0 && currentIndex < weekDays.length - 1) {
+        // If the current day is not Friday, move to the next day
+        nextDay = weekDays[currentIndex + 1];
+      } else {
+        // If the currentDay is not found in weekDays, start from Monday
+        nextDay = "Monday";
+      }
+
+      setCurrentDay(nextDay);
+
+      setTimeout(() => {
+        if (nextDay === "Sunday") {
+          showChosenPlan();
+        } else {
+          showTinderCard(nextDay);
+        }
+      }, 300);
+
+      // updateCards();
+    }
+    console.log('handleSwipeButton:clicked');
   };
 
   const updateCards = () => {
-    const allCards = Array.from(document.querySelectorAll('.tinder--card:not(.removed)'));
+    const allCards = Array.from(tinderCardsContainerRef.current.querySelectorAll('.tinder--card:not(.removed)'));
+
     allCards.forEach((card, index) => {
       card.style.zIndex = allCards.length - index;
       card.style.transform = `scale(${1 - index * 0.05}) translateY(${-index * 20}px)`;
       card.style.opacity = '1';
     });
 
-    if (allCards.length === 0 && currentDay && swipingStarted) {
-      showRedoPopup();
+    if (allCards.length === 0 && currentDay) {
+      setOpenRedoPopup(true);
     }
-  };
-
-  const showRedoPopup = () => {
-    setOpenDialog(true);
-  };
-
-  const closeRedoPopup = () => {
-    setOpenDialog(false);
-    const dayButton = document.getElementById(currentDay);
-    if (dayButton) {
-      dayButton.disabled = true;
-      dayButton.innerHTML += ` <span style="color: red; font-size: 16px;">✘</span>`;
-    }
-  };
-const groupedMeals = {
-  Breakfast: [],
-  Lunch: [],
-  Dinner: [],
-};
-
-tinderCards.forEach(meal => {
-  groupedMeals[meal.meal].push(meal);
-});
-  const redoDay = () => {
-    setOpenDialog(false);
-    setTinderCards(mealsData[currentDay]);
   };
 
   const showChosenPlan = () => {
-    setShowChosenMeals(true);
-    setTinderVisible(false);
+    if (tinderContainerRef.current) {
+      tinderContainerRef.current.style.display = "none";
+    }
+    if (chosenPlanSectionRef.current) {
+      chosenPlanSectionRef.current.style.display = "block";
+    }
+    displayChosenMeals();
+    console.log('showChosenPlan:clicked');
   };
 
-  const handleSwipeButton = (direction) => {
-    const allCards = Array.from(document.querySelectorAll('.tinder--card:not(.removed)'));
-    if (allCards.length > 0) {
-      const card = allCards[0]; // Get the first card
-      const endX = direction === 'right' ? 1000 : -1000; // Right or left swipe
-      card.style.transform = `translate(${endX}px, 0)`;
-      card.classList.add('removed');
-      setTinderCards(prev => prev.slice(1)); // Remove the card from the state
-      if (direction === 'right') {
-        setChosenMeals(prev => ({
-          ...prev,
-          [currentDay]: [...prev[currentDay], mealsData[currentDay][0]], // Add the first meal
-        }));
-      }
-      updateCards();
+  // const displayChosenMeals = () => {
+  //   for (const [day, meals] of Object.entries(chosenMeals)) {
+  //     const daySection = document.getElementById(`chosen${day}`).querySelector('.chosen-meals-row');
+  //     daySection.innerHTML = ''; // Clear previous meals
+  //     meals.forEach(meal => daySection.appendChild(meal.cloneNode(true))); // Append chosen meals
+  //   }
+  // };
+  const displayChosenMeals = () => {
+    for (const [day, meals] of Object.entries(chosenMeals)) {
+      const daySection = document.getElementById(`chosen${day}`).querySelector('.chosen-meals-row');
+      daySection.innerHTML = ''; // Clear previous meals
+  
+      meals.forEach(meal => {
+        // Check if the meal element already exists in the daySection
+        if (!daySection.querySelector(`[data-meal="${meal.dataset.meal}"]`)) {
+          daySection.appendChild(meal.cloneNode(true)); // Append the meal element
+        }
+      });
     }
   };
 
+  const redoDay = () => {
+    console.log(`Redoing selection for ${currentDay}`);
+    setOpenRedoPopup(false);
+  };
+
+  const closeRedoPopup = () => {
+    setOpenRedoPopup(false);
+  };
+
   return (
-    <Box>
-        <style>
-        {`
-          * {
-            box-sizing: border-box;
-            padding: 0;
-            margin: 0;
-            font-family: Arial, sans-serif;
-          }
-          body {
-            background: #CCFBFE;
-            font-family: sans-serif;
-          }
-          .day-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding: 10px;
-            background-color: #006064;
-          }
-          .day-button {
-            background: #00838F;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-          }
-          .day-button:hover:not(:disabled) {
-            background: #00ACC1;
-          }
-          .day-button:disabled {
-            background: #004d5a;
-            cursor: not-allowed;
-          }
-          .tick-icon {
-            color: #4CAF50;
-            font-size: 16px;
-          }
-          .tinder--cards {
-            position: relative;
-            width: 90vw;
-            max-width: 450px;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .tinder--card {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: #FFF;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            cursor: grab;
-            z-index: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            padding: 20px;
-          }
-
-          .mini-card {
-            width: 100%;
-            height: 180px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            display: flex;
-            font-size: 14px;
-            margin: 10px 0;
-          }
-
-          .meal-image-container {
-            width: 50%;
-            height: 100%;
-            overflow: hidden;
-            position: relative;
-          }
-
-          .meal-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-
-          .calorie-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: linear-gradient(135deg, #4CAF50, #83e68c);
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-          }
-            .meal-info {
-            width: 50%;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-          }
-
-          .meal-title {
-            font-weight: bold;
-            font-size: 16px;
-            margin: 10px 0;
-          }
-
-          .macros {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-          }
-
-          .macro-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-          }
-
-          .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-          }
-
-          .protein .dot {
-            background-color: #F3A830;
-          }
-
-          .fats .dot {
-            background-color: #5C85D6;
-          }
-
-          .carbs .dot {
-            background-color: #68B168;
-          }
-
-          .chosen-plan {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-          }
-
-          .day-section {
-            margin-bottom: 20px;
-          }
-
-          .day-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 10px;
-          }
-
-          .chosen-meals-row {
-            display: flex;
-            gap: 10px;
-          }
-
-          .tinder--buttons {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-            width: 100%;
-          }
-
-          .tinder--buttons button {
-            background-color: #00838F;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100px;
-          }
-
-          .tinder--buttons button:hover {
-            background-color: #00ACC1;
-          }
-
-          #redoPopup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-          }
-        .tinder {
-        width: 100vw;
-        height: calc(30vh - 60px);
-        display: ${tinderVisible ? 'block' : 'none'};
-        flex-direction: column;
-        justify-content: center !important;
-        align-items: center;
-        position: center;
-        }
-        `}
-      </style>
-      <Box className="day-buttons" sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-        {Object.keys(mealsData).map(day => (
-          <Button key={day} className="day-button" onClick={() => showTinderCard(day)}>
+    <Box sx={{ background: '#CCFBFE', padding: '20px' }}>
+      <Box display="flex" justifyContent="center" gap={2} mb={2}>
+        {weekDays.map((day) => (
+          <Button
+            key={day}
+            variant="contained"
+            color="primary"
+            onClick={() => handleDayClick(day)}
+            id={day}
+          >
             {day}
           </Button>
         ))}
-        <Button variant="contained" onClick={showChosenPlan}>
+        <Button variant="contained" color="secondary" onClick={showChosenPlan}>
           Chosen Diet Plan
         </Button>
       </Box>
 
-        
-      <Box className="tinder" id="tinderContainer" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Box className="tinder--cards" id="tinderCardsContainer">
-          {tinderCards.map((meal, index) => (
-            <div className="tinder--card" key={index}>
-              <div className="mini-card" data-meal={meal.meal}>
-                <div className="meal-image-container">
-                  <img src={meal.image} alt={meal.title} className="meal-image" />
-                  <div className="calorie-badge">🔥 {meal.calories} Calories</div>
-                </div>
-                <div className="meal-info">
-                  <div className="meal-title">{meal.meal}</div>
-                  <div style={{ color: 'grey' }}>{meal.title}</div>
-                  <div className="macros">
-                    <div className="macro-item protein"><span>{meal.macros.protein}g Protein</span></div>
-                    <div className="macro-item fats"><span>{meal.macros.fats}g Fats</span></div>
-                    <div className="macro-item carbs"><span>{meal.macros.carbs}g Carbs</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </Box>
-        <Box className="tinder--buttons">
-          <Button onClick={() => handleSwipeButton('left')}>Nope</Button>
-          <Button onClick={() => handleSwipeButton('right')}>Love</Button>
-        </Box>
-      </Box>
-
-      <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-        <DialogTitle>Select Your Option</DialogTitle>
-        <DialogContent>
-          <Typography>Do you want to redo?</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={redoDay}>Yes</Button>
-          <Button onClick={closeRedoPopup}>No</Button>
-        </DialogActions>
-      </Dialog>
-
-      {showChosenMeals && (
-        <Box sx={{ marginTop: 2 }}>
-          {Object.entries(chosenMeals).map(([day, meals]) => (
-            <Box key={day} sx={{ marginBottom: 2 }}>
-              <Typography variant="h6">{day}</Typography>
-              <Box sx={{ display: 'flex', gap: 1 }}>
-                {meals.map((meal, index) => (
-                  <Box key={index} className="mini-card" sx={{ width: '100px' }}>
-                    <img src={meal.image} alt={meal.title} style={{ width: '100%' }} />
-                    <Typography variant="body2">{meal.title}</Typography>
-                  </Box>
-                ))}
-              </Box>
-            </Box>
-          ))}
+      {showTinder && (
+        <Box className="tinder" ref={tinderContainerRef} sx={{ display: 'none' }}>
+          <Box className="tinder--cards" ref={tinderCardsContainerRef} sx={{ position: 'relative', width: '90vw', maxWidth: '850px', height: '600px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {/* Tinder cards will be injected here */}
+          </Box>
+          <Box className="tinder--buttons" display="flex" justifyContent="space-around" mt={2}>
+            <Button variant="contained" color="error" onClick={() => handleSwipeButton('left')}>Nope</Button>
+            <Button variant="contained" color="success" onClick={() => handleSwipeButton('right')}>Love</Button>
+          </Box>
         </Box>
       )}
+
+      {/* Chosen Plan Section */}
+      <Box ref={chosenPlanSectionRef} id="chosenPlanSection" sx={{ display: 'none', marginTop: '20px' }}>
+        {weekDays.map(day => (
+          <Box key={day} id={`chosen${day}`} sx={{ marginBottom: '10px' }}>
+            <Typography variant="h6">{day}</Typography>
+            <Box className="chosen-meals-row" sx={{ display: 'flex', flexDirection: 'column' }} />
+          </Box>
+        ))}
+      </Box>
+
+      {/* Redo Popup */}
+      
     </Box>
   );
 };
 
-export default TinderComponent;
+export default MealSwipeComponent;
