@@ -303,7 +303,19 @@ const MealSwipeComponent = () => {
       </Box>
 
       {/* Redo Popup */}
-      
+      <Modal open={openRedoPopup} onClose={closeRedoPopup}>
+        <Paper sx={{ padding: 2, position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '90%', maxWidth: '350px' }}>
+          <IconButton onClick={closeRedoPopup} sx={{ position: 'absolute', top: 8, right: 8 }}>
+            <CloseIcon />
+          </IconButton>
+          <Typography variant="h6" gutterBottom>Select Your Option</Typography>
+          <Typography variant="body1" gutterBottom>Do you want to redo?</Typography>
+          <Box display="flex" justifyContent="center" gap={2}>
+            <Button variant="contained" color="primary" onClick={redoDay}>Yes</Button>
+            <Button variant="outlined" color="secondary" onClick={closeRedoPopup}>No</Button>
+          </Box>
+        </Paper>
+      </Modal>
     </Box>
   );
 };
