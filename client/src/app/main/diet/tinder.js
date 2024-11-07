@@ -15,23 +15,23 @@ const mealsData = {
     {
       meal: "Breakfast",
       title: "Fluffy Pancakes",
-      calories: 420,
+      calories:  420,
       macros: { protein: 10, fats: 14, carbs: 45 },
-      image: "https://images.unsplash.com/photo-1559638740-3d5419b8b16a",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
     },
     {
       meal: "Lunch",
       title: "Grilled Salmon Salad",
       calories: 520,
       macros: { protein: 30, fats: 20, carbs: 40 },
-      image: "https://images.unsplash.com/photo-1514516876419-2c04ed3d3c74",
+      image: "https://images.unsplash.com/photo-1516100882582-96c3a05fe590",
     },
     {
       meal: "Dinner",
       title: "Pasta Carbonara",
       calories: 700,
       macros: { protein: 25, fats: 30, carbs: 70 },
-      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
+      image: "https://images.unsplash.com/photo-1506354666786-959d6d497f1a",
     },
   ],
   Tuesday: [
@@ -40,21 +40,21 @@ const mealsData = {
       title: "Greek Yogurt Parfait",
       calories: 350,
       macros: { protein: 20, fats: 5, carbs: 50 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
     },
     {
       meal: "Lunch",
       title: "Chicken Caesar Wrap",
       calories: 600,
       macros: { protein: 35, fats: 25, carbs: 45 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
+      image: "https://images.unsplash.com/photo-1516100882582-96c3a05fe590",
     },
     {
       meal: "Dinner",
       title: "Stir-Fried Tofu and Vegetables",
       calories: 450,
       macros: { protein: 20, fats: 15, carbs: 60 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
+      image: "https://images.unsplash.com/photo-1506354666786-959d6d497f1a",
     },
   ],
   Wednesday: [
@@ -63,21 +63,21 @@ const mealsData = {
       title: "Oatmeal with Berries",
       calories: 250,
       macros: { protein: 10, fats: 5, carbs: 45 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
     },
     {
       meal: "Lunch",
       title: "Quinoa Salad",
       calories: 400,
       macros: { protein: 15, fats: 10, carbs: 60 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
+      image: "https://images.unsplash.com/photo-1516100882582-96c3a05fe590",
     },
     {
       meal: "Dinner",
       title: "Beef Stir-Fry",
       calories: 700,
       macros: { protein: 40, fats: 30, carbs: 60 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
+      image: "https://images.unsplash.com/photo-1506354666786-959d6d497f1a",
     },
   ],
   Thursday: [
@@ -86,14 +86,14 @@ const mealsData = {
       title: "Smoothie Bowl",
       calories: 300,
       macros: { protein: 15, fats: 8, carbs: 50 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
     },
     {
       meal: "Lunch",
       title: "Turkey Sandwich",
       calories: 500,
       macros: { protein: 30, fats: 15, carbs: 50 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
+      image: "https://images.unsplash.com/photo-1516100882582-96c3a05fe590",
     },
     {
       meal: "Dinner",
@@ -109,14 +109,14 @@ const mealsData = {
       title: "Egg and Spinach Wrap",
       calories: 350,
       macros: { protein: 20, fats: 15, carbs: 30 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
     },
     {
       meal: "Lunch",
       title: "Poke Bowl",
       calories: 600,
       macros: { protein: 30, fats: 20, carbs: 65 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
+      image: "https://images.unsplash.com/photo-1516100882582-96c3a05fe590",
     },
     {
       meal: "Dinner",
@@ -132,14 +132,14 @@ const mealsData = {
       title: "French Toast",
       calories: 400,
       macros: { protein: 12, fats: 18, carbs: 50 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
     },
     {
       meal: "Lunch",
       title: "Caprese Salad",
       calories: 350,
       macros: { protein: 15, fats: 20, carbs: 30 },
-      image: "https://images.unsplash.com/photo-1589927986089-35812378b8e8",
+      image: "https://images.unsplash.com/photo-1516100882582-96c3a05fe590",
     },
     {
       meal: "Dinner",
@@ -155,7 +155,7 @@ const mealsData = {
       title: "Avocado Toast",
       calories: 300,
       macros: { protein: 8, fats: 12, carbs: 40 },
-      image: "https://images.unsplash.com/photo-1555685812-4f7e1b0e1b58",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38",
     },
   ],
   // Other days...
@@ -268,14 +268,35 @@ const TinderComponent = () => {
   };
 
   const closeRedoPopup = () => {
-    setOpenRedoPopup(false);
+    // Hide the redo popup
+    document.getElementById('redoPopup').style.display = 'none';
+  
+    // Disable the current day button and add the cross icon
     const dayButton = document.getElementById(currentDay);
     if (dayButton) {
-      dayButton.disabled = true;  
+      dayButton.disabled = true; // Disable the button
       dayButton.innerHTML += ` <span style="color: red; font-size: 16px;">✘</span>`;
     }
-    console.log('closeRedoPopup:true')
+  
+    // Check if it's Sunday, then redirect to the chosen plan section
+    if (currentDay === 'Sunday') {
+      showChosenPlan();
+    } else {
+      // Find the index of the current day
+      const currentIndex = weekDays.indexOf(currentDay);
+  
+      // Determine the next day in the sequence
+      const nextDay = currentIndex >= 0 && currentIndex < weekDays.length - 1 ? weekDays[currentIndex + 1] : null;
+  
+      // Automatically navigate to the next day's swiping if it exists
+      if (nextDay) {
+        showTinderCard(nextDay); // Load the next day's cards
+      }
+    }
+  
+    console.log('closeRedoPopup: true');
   };
+  
 
   const redoDay = (day) => {
     setOpenRedoPopup(false);
@@ -380,7 +401,7 @@ const TinderComponent = () => {
             align-items: center;
             justify-content: center;
             width: 100%;
-            height: auto;
+            height: 500px;
             gap: 20px;
             margin-top: 20px;
           }
@@ -409,8 +430,8 @@ const TinderComponent = () => {
             text-align: center;
           }
           .meal-image-container {
-            width: 100px;
-            height: 100px;
+            width: 200px;
+            height: 150px;
             border-radius: 8px;
             overflow: hidden;
             position: relative;
@@ -452,18 +473,18 @@ const TinderComponent = () => {
         {tinderCards.length > 0 && (
           <>
             <Button onClick={() => handleSwipeButton('left')}>Nope</Button>
-            <Box className="tinder--card">
+            <Box className="tinder--card ">
               {tinderCards[0].map((meal, index) => (
                 <div key={index} className="mini-card">
                   <div className="meal-image-container">
                     <img src={meal.image} alt={meal.title} className="meal-image" />
-                    <div className="calorie-badge">{meal.calories} Calories</div>
+                    <div className="calorie-badge"><i>🔥</i>{meal.calories} Calories</div>
                   </div>
                   <div className="meal-info">
                     <div className="meal-title">{meal.meal}</div>
                     <Typography variant="body2" color="textSecondary">{meal.title}</Typography>
                     <div className="macros">
-                      {meal.macros.protein}g Protein • {meal.macros.fats}g Fats • {meal.macros.carbs}g Carbs
+                    • {meal.macros.protein}g Protein • {meal.macros.fats}g Fats • {meal.macros.carbs}g Carbs
                     </div>
                   </div>
                 </div>
@@ -487,13 +508,13 @@ const TinderComponent = () => {
                   <Box key={index} className="mini-card">
                     <div className="meal-image-container">
                       <img src={meal.image} alt={meal.title} className="meal-image" />
-                      <div className="calorie-badge">{meal.calories} Calories</div>
+                      <div className="calorie-badge"><i>🔥</i>{meal.calories} Calories</div>
                     </div>
                     <div className="meal-info">
                       <div className="meal-title">{meal.meal}</div>
                       <Typography variant="body2" color="textSecondary">{meal.title}</Typography>
-                      <div className="macros">
-                        {meal.macros.protein}g Protein • {meal.macros.fats}g Fats • {meal.macros.carbs}g Carbs
+                      <div className="macros macro-item protein">
+                      • {meal.macros.protein}g Protein • {meal.macros.fats}g Fats • {meal.macros.carbs}g Carbs
                       </div>
                     </div>
                   </Box>
